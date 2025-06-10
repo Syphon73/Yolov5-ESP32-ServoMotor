@@ -2,8 +2,8 @@
 #include <WebServer.h>
 #include <ESP32Servo.h>
 
-const char* ssid = "Airtel-MyWiFi-AMF-311WW-6EAB";
-const char* password = "2e541aa8";
+const char* ssid = "DefaultWifi"; #your wifi ssid
+const char* password = "12345678"; #your wifi password
 
 
 WebServer server(80);
@@ -28,7 +28,7 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("\nConnected to WiFi.");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP()); #get your localIP adress from here
 
   
   server.on("/banana_detected", handleBanana);
