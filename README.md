@@ -33,7 +33,33 @@ git clone https://github.com/ultralytics/yolov5.git
 cd yolov5
 pip install -r requirements.txt
 ```
-### 2. Run Detection
+### 2. Run yoloservo.ino
+make sure the webserver is live (serial monitor logs)
+```bash
+Connected to WiFi.
+192.168.1.102
+HTTP server started
+
+```
+### 3. Update detect.py file
+Uses requests module to contact the ESP32 web server
+```bash
+import requests
+```
+code to be updated inside the detection loop after class name extraction
+
+```bash
+ESP32_URL = "http://192.168.1.102/detect"  # Replace with your ESP32's IP
+if names[c] == "banana":
+try:
+requests.post(ESP32_URL, data=names[c])
+print("sent banana to esp32")
+except Exception as e:
+print(f"[!] Failed to send to ESP32: {e}")
+
+```
+
+### 4. Run Detection
 ```bash
 python detect.py --source 0 --weights yolov5s.pt --conf 0.25 --view-img
 ```
